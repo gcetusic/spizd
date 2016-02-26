@@ -1,0 +1,160 @@
+# General parameters:
+
+#number of concurrent threads/connections to run
+spizd.maxThreads=1000
+
+#decrease number of threads/connections on SocketTimeoutException?
+#usefull when you want to measure maximum safe number of concurrent connections
+spizd.decreaseThreads=true
+
+#print connect messages?
+#start with verbose, then change to false when your setup is fine
+spizd.verboseConnect=true
+
+#print login messages?
+spizd.verboseLogin=true
+
+#print error messages?
+#start with verbose, then change to false when your setup is fine
+spizd.verboseFail=true
+
+#print a message after this many lines read/threads started
+spizd.reportLines=1000
+
+#print debug messages
+spizd.debug=false
+
+#close connections?
+spizd.close=true
+
+#circular dictionary/urllist file reading?
+#if true, after all dictionary lines are read, reading restarts
+#if false, program terminates after all lines are read
+spizd.circular=false
+
+#after starting a thread, spizd sleeps for this many milliseconds, 0 = no sleep
+#this may be used to implement i.e. connections per second limit
+#used for tcp connection probe and all protocols
+spizd.threadDelay=0
+
+#TCP probe sets SO_TIMEOUT option to this many milliseconds
+#Probe closes sockets only after all threads have been started
+spizd.probeTimeout=60000
+
+# HTTP specific options:
+
+# URL list file name (relative to current working directory), overriden from command line:
+http.urlListFile=urlList.txt
+
+#http proxy server (overriden from command line):
+#http.proxyServer=yourProxyHere
+#http proxy port:
+http.proxyPort=8080
+
+#read buffer size (bytes):
+http.bufferSize=4096
+
+# read full URL content? if false, only first read is issued
+# (which is just enough to test a proxy)
+http.readFull=true
+
+
+# SMTP specific options:
+
+# number of messages sent per smtp connection, default 0 (don't send any)
+mail.messages=0
+
+# message subject
+mail.subject=SpizdTest
+
+# message body
+mail.body=test testing 1 2 3...
+
+# mail from
+mail.from=you@your.domain
+
+# mail recepient
+mail.to=you@some.domain
+
+
+# RADIUS specific options:
+
+# RADIUS secret:
+radius.secret=testing123
+
+# shall we send accounting start/stop messages
+radius.accounting=true
+
+# shall we generate and add Acct-Session-Id attribute for each thread
+radius.addsession=true
+
+# Number of interim accounting messages to send upon sucessfull authentification:
+radius.interim=0
+
+# milliseconds to wait after receiving a request, before sending another
+radius.requestdelay=0
+
+# socket timeout in milliseconds, > 0, default 3000
+radius.sotimeout=3000
+
+# You can add any number of radius attributes here, each attribute will be
+# added to each radius request.
+
+# Authentification attributes are prefixed with radius.auth:
+#radius.auth.someattribute=somevalue
+radius.auth.Framed-Protocol=PPP
+
+# Accounting attributes are prefixed with radius.acct:
+#radius.acct.someattribute=somevalue
+#for example:
+radius.acct.Acct-Input-Octets=1000000
+radius.acct.Acct-Output-Octets=2000000
+radius.acct.Acct-Input-Gigawords=1
+radius.acct.Acct-Output-Gigawords=2
+radius.acct.Acct-Session-Time=60
+radius.acct.Calling-Station-Id=aa:bb:cc:dd:ee:ff:gg
+radius.acct.Called-Station-Id=gg:ff:ee:dd:cc:bb:aa
+radius.acct.Framed-IP-Address=100.100.100.100
+#... and so on
+
+# Dictionary generation and reading parameters:
+
+#dictionary file name (relative to spizd/etc directory, used for both reading and generation):
+dict.file=dictionary.txt
+
+#separator; not used used password generation
+#used only if login is not provided in command line
+#dictionary file then contains login and password, in one line, separated by this separator
+dict.separator=:
+
+#generate combinations lowercase, uppercase, numbers?
+dict.useUpper=false
+dict.useLower=true
+dict.useNumbers=false
+#add lowercase-only, uppercase-only, numbers-only passwords?
+dict.addUpper=true
+dict.addLower=true
+dict.addNumbers=true
+#NOTE: if you plan to use lower/upper/number-only passwords, you have to set both use and add properties above.
+
+#generate mixed case?
+dict.mixed=false
+
+#Number of uppercase and lowercase letters in generated passwords:
+dict.upMinLen=1
+dict.upMaxLen=1
+dict.lowMinLen=4
+dict.lowMaxLen=6
+
+#length of mixed case strings
+dict.mixedLen=4
+
+#Number of digits in generated passwords
+dict.numMinLen=2
+dict.numMaxLen=3
+
+#passwords start with uppercase?
+dict.upperStart=true
+
+#passwords end with numbers?
+dict.numbersEnd=true

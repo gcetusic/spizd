@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1"
+      http-equiv="Content-Type">
+    <title>SPIZD</title>
+  </head>
+  <body>
+    <table style="text-align: left; width: 792px; height: 307px;
+      margin-left: auto; margin-right: auto;" border="0" cellpadding="2"
+      cellspacing="2">
+      <tbody>
+        <tr>
+          <td style=" vertical-align: top; width: 500px;"><big><big><big><big><span
+                      style="font-weight: bold;"></span></big></big></big></big><img
+              style=" width: 500px; height: 295px;" alt="spizd-logo"
+              src="spizd-logo.jpg"><br>
+          </td>
+          <td style=" vertical-align: top;"><big><big><big><big
+                    style="color: rgb(255, 0, 0);"><span
+                      style="font-weight: bold;">S</span></big>tress<br>
+                  <big style="color: rgb(255, 153, 0);"><span
+                      style="font-weight: bold;">P</span></big>robing<br>
+                  <big style="color: rgb(51, 204, 0);"><span
+                      style="font-weight: bold;">I</span></big>nvasive<br>
+                  <big style="color: rgb(204, 51, 204);"><span
+                      style="font-weight: bold;">Z</span></big>ap<br>
+                  <big style="color: rgb(51, 51, 255);"><span
+                      style="font-weight: bold;">D</span></big>estructor</big></big></big></td>
+        </tr>
+        <tr>
+          <td colspan="2" style="vertical-align: top;">
+            <div style="margin-left: 80px;">A free, open source, <span
+                style="font-weight: bold;">simple</span> load testing
+              tool for:<br>
+              <br>
+            </div>
+            <div style="margin-left: 200px;">HTTP<br>
+              POP3 plain/TLS, POP3S<br>
+              IMAP plain/TLS, IMAPS<br>
+              SMTP plain/TLS, SMTPS<br>
+              SSH<br>
+              RADIUS<br>
+            </div>
+            <br>
+            <div style="margin-left: 120px;">Licenses: <br>
+              <div style="margin-left: 40px;">Software - <a
+                  href="http://www.gnu.org/licenses/gpl.html">GPL</a><br>
+                Art by Sasa Zec - <a
+                  href="http://creativecommons.org/licenses/by-sa/3.0/">CC
+                  SA</a><br>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div style="margin-left: 80px;">
+      <p style="font-weight: bold;"><big>0) REQUIREMENTS</big></p>
+      <br>
+      Java.<br>
+      <br>
+      <big style="font-weight: bold;">1) INSTALLING</big><br>
+      <br>
+      <a href="http://sourceforge.net/projects/spizd/files/"> Download
+        from SourceForge</a> and unzip.<br>
+      <br>
+      <big><span style="font-weight: bold;">2) CONFIGURING</span></big><br>
+      <br>
+      Edit etc/spizd.properties.<br>
+      <br>
+      <big><span style="font-weight: bold;">3) RUNNING</span></big><br>
+      <br>
+      Make sure you read and customize etc/spizd.propeties file.<br>
+      <br>
+      There's a few script files in bin directory, they all require the
+      property file.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-probe.sh</span> will open a
+      number of connections to given server, and read one line of
+      response from each of them, trying to determine number of
+      simultaneous connctions a server can handle.<br>
+      This is probably the first thing you'll be running.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-http.sh</span> reads given
+      url list file, and bombs the server with one request per
+      connection, keeping constant number of concurrent connections, or
+      decreasing number of connections, as configured.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-pop3.sh</span> reads
+      password dictionary file, and tries to login to a pop server with
+      given username and passwords read from the dictionary, via
+      multiple connections.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-imap.sh</span> does the
+      same thing for imap servers.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-smtp.sh</span> does the
+      same thing for smtp servers. Additionally, it can send a number of
+      messages for each connection, see spizd.properties.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-ssh.sh</span> does the same
+      thing for ssh.<br>
+      Note: default confing of sshd contains MaxStartups "10:30:60",
+      meaning 10 unauthenticated connections are allowed, 10-60 have 30%
+      disconnect chance, and all above 60 are disallowed.<br>
+      <br>
+      spizd-pop3s.sh, spizd-pop3tls.sh, spizd-imaps.sh,
+      spizd-imaptls.sh, spizd-smtps.sh, spizd-smtptls.sh use secure
+      authentification mechanisms for mail servers.<br>
+      <br>
+      <span style="font-weight: bold;">installcert.sh</span> is utility
+      to install self-signed certificates if required.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-radius.sh</span> reads
+      dictionary file and sends auth-request packets to destigned radius
+      server. Options like radius secret need to be specified in
+      spizd.properties file.<br>
+      <br>
+      <span style="font-weight: bold;">spizd-dict.sh</span> generates
+      password dictionary file within given parameters.<br>
+      Password generation is not very smart, and generated dictionary
+      file contains passwords sorted alphabetically, rough equivalent of
+      brute-force attack; if you really need to crack some passwords,
+      get some better dictionary file(s).<br>
+      <br>
+      Dictionary file name is specified in properties file.<br>
+      File may contain only passwords, or login and password separated
+      by defined separator; in former case login must be provided as
+      command line argument.<br>
+      <br>
+      For more information on how each of these modules work, check
+      included javadoc, or - Use the Source, Luke!<br>
+      <br>
+      <span style="font-weight: bold;">Note for crackers</span>: this is
+      invasive cracking method and you will be noticed immediatelly.<br>
+      <br>
+      <br>
+      <big style="font-weight: bold;">4) BUILDING</big><br>
+      <br>
+      There's ant build.xml file in this directory, so to build SPIZD
+      distro, just type ant dist.<br>
+      <br>
+      <br>
+      <big><span style="font-weight: bold;">5) LINUX NOTES</span></big><br>
+      <br>
+      Running a stress-test client is not a trivial task.<br>
+      <br>
+      A linux user (including root) can have only 1024 files and sockets
+      opened by default; check ulimit -n and nofile in limits.conf.<br>
+      <br>
+      Furthermore, number of local ports is also limited; check
+      /proc/sys/net/ipv4/ip_local_port_range
+      (net.ipv4.ip_local_port_range in sysctl.conf).<br>
+      <br>
+      Kernel IP connection tracking module is also limited; check
+      /proc/sys/net/ipv4/ip_conntrack_max (net.ipv4.ip_conntrack_max in
+      sysctl.conf) and /proc/sys/net/nf_conntrack_max<br>
+      (net.netfilter.nf_conntrack_max).<br>
+      <br>
+      If that's not enough, you may also need to change
+      /proc/sys/net/ipv4/tcp_tw_reuse (net.ipv4.tcp_tw_reuse in
+      sysctl.conf) to 1, to reuse sockets in TIME_WAIT state, or to
+      reduce /proc/sys/net/ipv4/tcp_fin_timeout
+      (net.ipv4.tcp_fin_timeout in sysctl.conf) so sockets wait less for
+      the other peer to close.<br>
+      <br>
+      Also, server may detect stress test as syn flood and start sending
+      syn cookies; this may result in connection timeouts/refusal.<br>
+      If so, set /proc/sys/net/ipv4/tcp_syncookies to 0.<br>
+      <br>
+    </div>
+    <br>
+  </body>
+</html>

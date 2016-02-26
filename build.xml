@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<!-- $Id: build.xml,v 1.1.1.1 2009/03/11 15:17:22 jalmasi Exp $ -->
+
+<project name="spizd" default="targets" basedir=".">
+  <property name="source" value="src" />
+  <property name="etc" value="${source}/etc" />
+  <property name="dist" value="dist" />
+  <property name="build" value="build" />
+  <property name="javadoc" value="javadoc"/>
+  <property name="main" value="${source}" />
+  <property name="main.classes" value="${build}" />
+  <property name="lib" value="lib" />
+  <property name="project" value="SPIZD" />
+  <property file="${etc}/VERSION" />
+  <property name="classpath" value="${classpath}:${classes}" />
+  <property name="deprecation" value="false" />
+  <property name="debug" value="on" />
+  <property name="project" value="${project}" />
+
+  <target name="targets">
+  <echo>
+
+  ANT build for ${project} ${version}
+
+  Available targets:
+
+  clean        Cleans ${build} and ${dist} directories
+  main         Builds main ${project} packages
+  javadoc      Builds javadoc
+  dist         Builds distribution
+
+  </echo>
+  </target>
+
+  <target name="prepare">
+    <mkdir dir="${build}"/>
+    <mkdir dir="${dist}"/>
+  </target>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+
+  <path id="main.classpath">
+    <pathelement path="${classpath}"/>
+    <fileset dir="${lib}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <path id="exec.classpath">
+    <pathelement path="${classpath}"/>
+    <fileset dir="${lib}">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${dist}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+
+  <target name="main" depends="prepare" description="Build all sources">
+    <javac srcdir="${main}" destdir="${main.classes}"
+      debug="${debug}"
+      deprecation="${deprecation}" >
+      <classpath refid="main.classpath" />
+    </javac>
+  </target>
+
+  <target name="javadoc" depends="main" description="Builds API docs">
+    <mkdir dir="doc/api"/>
+    <javadoc sourcepath="${main}" classpath="${main.classes}" destdir="doc/api" packagenames="*"/>
+  </target>
+
+  <target name="dist" depends="main" description="Builds distribution jar">
+    <jar jarfile="${dist}/spizd.jar">
+      <fileset dir="${main.classes}"/>
+    </jar>
+  </target>
+
+</project>
